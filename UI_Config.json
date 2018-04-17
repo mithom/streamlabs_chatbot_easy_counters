@@ -49,5 +49,54 @@
     "tooltip":"value specification when 'toggle to' is on MP, MR, MH or US",
     "group":"Change Counter",
     "value":""
+  },
+  "addCommand":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!addCounter"
+  },
+  "removeCounter":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!removeCounter"
+  },
+  "addPermission":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!addCounterPermission"
+  },
+  "removePermission":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!removeCounterPermission"
+  },
+  "getPermission":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!counterPermission"
+  },
+  "GetUserChangePermissionGlobal":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!counterPermissions"
+  },
+  "toggleUserChangeGlobal":{
+    "type":"textbox",
+    "label":"addCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!toggleCounterPermissions"
   }
 }

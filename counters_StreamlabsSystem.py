@@ -19,15 +19,8 @@ Version = "1.0.0"
 # ---------------------------------------
 ScriptSettings = None
 m_ModeratorPermission = "Moderator"
-m_AddCommand = "!addCounter"
-m_RemoveCommand = "!removeCounter"
-m_addPermission = "!addCounterPermission"
-m_removePermission = "!removeCounterPermission"
-m_getPermission = "!counterPermission"
 m_allowed_permissions = ["Everyone", "Regular", "Subscriber", "GameWisp_Subscriber", "User_Specific", "Min_Rank",
                          "Min_Points", "Min_Hours", "Moderator", "Editor", "Caster"]
-m_GetUserChangePermissionGlobal = "!counterPermissions"
-m_ToggleUserChangeGlobal = "!toggleCounterPermissions"
 m_CounterHash = {}
 m_PermissionsHash = {}
 m_CountersFile = os.path.join(os.path.dirname(__file__), "Counters.json")
@@ -57,6 +50,13 @@ class Settings(object):
             self.allow_user_change_toggle = True
             self.toggle_to = "Regular"
             self.toggle_to_info = ""
+            self.addCommand = "!addCounter"
+            self.removeCommand = "!removeCounter"
+            self.addPermission = "!addCounterPermission"
+            self.removePermission = "!removeCounterPermission"
+            self.getPermission = "!counterPermission"
+            self.GetUserChangePermissionGlobal = "!counterPermissions"
+            self.toggleUserChangeGlobal = "!toggleCounterPermissions"
 
     def reload(self, jsondata):
         """ Reload settings from Chatbot user interface by given json data. """
@@ -296,27 +296,27 @@ def process_command(data):
     param1 = data.GetParam(0)
     if word_count == 2:
         param2 = data.GetParam(1)
-        if param1 == m_AddCommand:
+        if param1 == ScriptSettings.AddCommand:
             add_command(param2, data.User)
-        elif param1 == m_RemoveCommand:
+        elif param1 == ScriptSettings.RemoveCommand:
             remove_command(param2, data.User)
-        elif param1 == m_getPermission:
+        elif param1 == ScriptSettings.getPermission:
             show_permission(param2, data.User)
-        elif param1 == m_removePermission:
+        elif param1 == ScriptSettings.removePermission:
             remove_permission(param2, data.User)
         elif param1 in m_CounterHash:
             handle_counter(param1, data.User, param2)
     elif word_count == 1:
-        if param1 == m_GetUserChangePermissionGlobal:
+        if param1 == ScriptSettings.GetUserChangePermissionGlobal:
             show_user_change_permission_global(data.User)
-        elif param1 == m_ToggleUserChangeGlobal:
+        elif param1 == ScriptSettings.ToggleUserChangeGlobal:
             toggle_user_change_permission_global(data.User)
         else:
             show_counter(param1, data.User)
     elif word_count > 2:
         param2 = data.GetParam(1)
         args = data.Message.split()[2:]
-        if param1 == m_addPermission:
+        if param1 == ScriptSettings.addPermission:
             add_permission(param2, data.User, *args)
 
 
