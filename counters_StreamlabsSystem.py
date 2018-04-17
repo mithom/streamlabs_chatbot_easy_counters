@@ -296,9 +296,9 @@ def process_command(data):
     param1 = data.GetParam(0)
     if word_count == 2:
         param2 = data.GetParam(1)
-        if param1 == ScriptSettings.AddCommand:
+        if param1 == ScriptSettings.addCommand:
             add_command(param2, data.User)
-        elif param1 == ScriptSettings.RemoveCommand:
+        elif param1 == ScriptSettings.removeCommand:
             remove_command(param2, data.User)
         elif param1 == ScriptSettings.getPermission:
             show_permission(param2, data.User)
@@ -307,9 +307,9 @@ def process_command(data):
         elif param1 in m_CounterHash:
             handle_counter(param1, data.User, param2)
     elif word_count == 1:
-        if param1 == ScriptSettings.GetUserChangePermissionGlobal:
+        if param1 == ScriptSettings.getUserChangePermissionGlobal:
             show_user_change_permission_global(data.User)
-        elif param1 == ScriptSettings.ToggleUserChangeGlobal:
+        elif param1 == ScriptSettings.toggleUserChangeGlobal:
             toggle_user_change_permission_global(data.User)
         else:
             show_counter(param1, data.User)
