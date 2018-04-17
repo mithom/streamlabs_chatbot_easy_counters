@@ -17,7 +17,7 @@ Version = "1.0.0"
 # ---------------------------------------
 #   Set Global Variables
 # ---------------------------------------
-# m_CommandPermission = ["Moderator", "Editor", "Broadcaster"]
+ScriptSettings = None
 m_ModeratorPermission = "Moderator"
 m_AddCommand = "!addCounter"
 m_RemoveCommand = "!removeCounter"
@@ -205,16 +205,19 @@ def handle_counter(counter, user, *args):
                 m_CounterHash[counter] += 1
                 Parent.SendTwitchMessage(
                     "/me [increased] current %s count is %s" % (counter[1:], m_CounterHash[counter]))
+                save_counters()
             elif args[0] == "-":
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] -= 1
                 Parent.SendTwitchMessage(
                     "/me [decreased] current %s count is %s" % (counter[1:], m_CounterHash[counter]))
+                save_counters()
             elif args[0].isdigit():
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] = int(args[0])
                 Parent.SendTwitchMessage(
                     "/me [set nb] current %s count is %s" % (counter[1:], m_CounterHash[counter]))
+                save_counters()
 
 
 def show_counter(counter, user):
@@ -238,6 +241,7 @@ def toggle_user_change_permission_global(user):
         Parent.SendTwitchMessage(
             "/me the global permission to change counters has been set to %s" % str(
                 m_PermissionsHash["Global"]))
+        save_permissions()
 
 
 def remove_permission(counter, user):
@@ -245,6 +249,7 @@ def remove_permission(counter, user):
         if counter in m_PermissionsHash:
             del m_PermissionsHash[counter]
             Parent.SendTwitchMessage("/me the counter %s is back on the global permission" % counter)
+            save_permissions()
 
 
 def show_permission(counter, user):
@@ -280,6 +285,7 @@ def add_permission(counter, user, *args):
                 m_PermissionsHash[counter] = args
                 Parent.SendTwitchMessage(
                     "/me counter %s permission is set to %s" % (counter, str(m_PermissionsHash[counter])))
+                save_permissions()
         else:
             Parent.SendTwitchMessage("/me counter %s does not exist" % counter)
 
