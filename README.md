@@ -35,5 +35,9 @@ example counter:
 * custom text messages
 * your feature request here? mail me @ mi_thom@hotmail.com
 
+## see it in action?
+streamers that are using this script:
+* [Billie_bob](http://www.twitch.tv/billie_bob)
+
 ### changelog:
 v 1.0.0: made public
