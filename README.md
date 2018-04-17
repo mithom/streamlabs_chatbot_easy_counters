@@ -30,3 +30,10 @@ example counter:
 * a shorter cooldown to prevent multiple people counting the same event
 * global permission in non-moderator toggle stance
 * disable the global permission toggle
+
+### To be expected:
+* custom text messages
+* your feature request here? mail me @ mi_thom@hotmail.com
+
+### changelog:
+v 1.0.0: made public
