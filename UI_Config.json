@@ -1,0 +1,53 @@
+{
+  "output_file":"counterSettings.json",
+  "use_cd":{
+    "type":"checkbox",
+    "value":true,
+    "label":"Use Cooldown Manager",
+    "tooltip":"use cooldowns or not",
+    "group":"Show Counter"
+  },
+  "show_cd":{
+    "type":"numberbox",
+    "label":"Show Cooldown(seconds)",
+    "value": 15,
+    "tooltip":"Cooldown in seconds to show counter value",
+    "group":"Show Counter"
+  },
+  "individual_cd":{
+    "type":"checkbox",
+    "value":false,
+    "label": "User Cooldown",
+    "tooltip": "use user cooldown instead global",
+    "group":"Show Counter"
+  },
+  "set_cd":{
+    "type":"numberbox",
+    "label":"Set Cooldown (seconds)",
+    "value": 5,
+    "tooltip":"prevent different persons form adding at same time",
+    "group":"Change Counter"
+  },
+  "allow_user_change_toggle":{
+    "type":"checkbox",
+    "tooltip":"Enable toggle to allow regulars to change counters",
+    "label":"Enable user change toggle",
+    "value": true,
+    "group":"Change Counter"
+  },
+  "toggle_to":{
+    "type":"dropdown",
+    "label":"toggle to",
+    "value":"Regular",
+    "items":["Regular", "Everyone", "Subscriber", "Min_Points", "Min_Rank", "Min_Hours", "User_Specific"],
+    "group":"Change Counter",
+    "tooltip":"global permission toggle non-mod option"
+  },
+  "toggle_to_info":{
+    "type":"textbox",
+    "label":"permission extra info",
+    "tooltip":"value specification when 'toggle to' is on MP, MR, MH or US",
+    "group":"Change Counter",
+    "value":""
+  }
+}
