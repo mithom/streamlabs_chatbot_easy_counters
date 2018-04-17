@@ -57,7 +57,7 @@
     "group":"Command Names",
     "value":"!addCounter"
   },
-  "removeCounter":{
+  "removeCommand":{
     "type":"textbox",
     "label":"addCounter",
     "tooltip":"command to be typed, this has to start with a '!'",
