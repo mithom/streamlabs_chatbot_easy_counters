@@ -30,6 +30,7 @@ example counter:
 * a shorter cooldown to prevent multiple people counting the same event
 * global permission in non-moderator toggle stance
 * disable the global permission toggle
+* custom command names
 
 ### To be expected:
 * custom text messages
