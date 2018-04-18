@@ -46,4 +46,6 @@ streamers that are using this script:
 * [Billie_bob](http://www.twitch.tv/billie_bob)
 
 ### changelog:
+v 1.0.1: added custom command names & file sync
+
 v 1.0.0: made public
