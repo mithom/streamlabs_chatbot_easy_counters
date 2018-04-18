@@ -32,6 +32,11 @@ example counter:
 * disable the global permission toggle
 * custom command names
 
+### Files to read for showing on stream
+They will be kept in sync in real-time
+* Counters.json
+* permissions.json
+
 ### To be expected:
 * custom text messages
 * your feature request here? mail me @ mi_thom@hotmail.com
