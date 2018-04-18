@@ -64,6 +64,13 @@
     "group":"Command Names",
     "value":"!removeCounter"
   },
+  "editCommand":{
+    "type":"textbox",
+    "label":"editCounter",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!editCounter"
+  },
   "addPermission":{
     "type":"textbox",
     "label":"addCounterPermission",
@@ -85,7 +92,7 @@
     "group":"Command Names",
     "value":"!counterPermission"
   },
-  "GetUserChangePermissionGlobal":{
+  "getUserChangePermissionGlobal":{
     "type":"textbox",
     "label":"global counterPermissions",
     "tooltip":"command to be typed, this has to start with a '!'",
@@ -125,6 +132,13 @@
     "label":"specific_permission",
     "tooltip":"the message displayed when on a specific permission",
     "group":"Responses",
-    "value":"counter {0} permission is {1}, {2}"
+    "value":"{0} counter's permission is {1}, {2}"
+  },
+  "counter_not_exist":{
+    "type":"textbox",
+    "label":"counter_not_exists",
+    "tooltip":"the message displayed when modifying non existing counter (mod commands only)",
+    "group":"Responses",
+    "value":"{0} counter does not exist"
   }
 }
