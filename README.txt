@@ -1,4 +1,5 @@
-view a formatted version on https://github.com/mithom/streamlabs_chatbot_easy_counters
+view a formatted version on
+https://github.com/mithom/streamlabs_chatbot_easy_counters
 
 # streamlabs_chatbot_easy_counters
 
@@ -63,8 +64,10 @@ streamers that are using this script:
 ### changelog:
 v 1.2.0: ability to change message from specific counters
 
-v 1.1.1: added custom message for when counter does not exists
-         bugfix for problem with 'getUserChangePermissionGlobal' setting
+v 1.1.1:
+* added custom message for when counter does not exists
+
+* bugfix for problem with 'getUserChangePermissionGlobal' setting
 
 v 1.1.0: added custom messages for commands that users can use
 

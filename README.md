@@ -1,4 +1,5 @@
-view a formatted version on https://github.com/mithom/streamlabs_chatbot_easy_counters
+view a formatted version on 
+https://github.com/mithom/streamlabs_chatbot_easy_counters
 
 # streamlabs_chatbot_easy_counters
 
@@ -23,10 +24,10 @@ example counter:
     !addCounter !some_other_counter my count gets displayed in this way: {1}
     !editCounter !burp now burp also gets displayed differently: {1}
     !editCounter !burp                  #this is now back on default message
-    !burp 10 
-    !burp + 
-    !burp - 
-    !burp 
+    !burp 10
+    !burp +
+    !burp -
+    !burp
     !addCounterPermission !burp Min_hours 10
 
 ## On top of these commands, it has some configurable settings
@@ -63,7 +64,10 @@ streamers that are using this script:
 ### changelog:
 v 1.2.0: ability to change message from specific counters
 
-v 1.1.1: added custom message for when counter does not exists
+v 1.1.1:
+* added custom message for when counter does not exists
+
+* bugfix for problem with 'getUserChangePermissionGlobal' setting
 
 v 1.1.0: added custom messages for commands that users can use
 
