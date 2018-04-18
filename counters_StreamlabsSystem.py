@@ -50,12 +50,14 @@ class Settings(object):
             self.allow_user_change_toggle = True
             self.toggle_to = "Regular"
             self.toggle_to_info = ""
+
+            # command names
             self.addCommand = "!addCounter"
             self.removeCommand = "!removeCounter"
             self.addPermission = "!addCounterPermission"
             self.removePermission = "!removeCounterPermission"
             self.getPermission = "!counterPermission"
-            self.GetUserChangePermissionGlobal = "!counterPermissions"
+            self.getUserChangePermissionGlobal = "!counterPermissions"
             self.toggleUserChangeGlobal = "!toggleCounterPermissions"
 
     def reload(self, jsondata):

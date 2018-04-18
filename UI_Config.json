@@ -59,42 +59,42 @@
   },
   "removeCommand":{
     "type":"textbox",
-    "label":"addCounter",
+    "label":"removeCounter",
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!removeCounter"
   },
   "addPermission":{
     "type":"textbox",
-    "label":"addCounter",
+    "label":"addCounterPermission",
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!addCounterPermission"
   },
   "removePermission":{
     "type":"textbox",
-    "label":"addCounter",
+    "label":"removeCounterPermission",
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!removeCounterPermission"
   },
   "getPermission":{
     "type":"textbox",
-    "label":"addCounter",
+    "label":"counterPermission",
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!counterPermission"
   },
   "GetUserChangePermissionGlobal":{
     "type":"textbox",
-    "label":"addCounter",
+    "label":"global counterPermissions",
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!counterPermissions"
   },
   "toggleUserChangeGlobal":{
     "type":"textbox",
-    "label":"addCounter",
+    "label":"global toggleCounterPermissions",
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!toggleCounterPermissions"
