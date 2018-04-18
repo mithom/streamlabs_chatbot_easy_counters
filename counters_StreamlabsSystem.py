@@ -178,6 +178,7 @@ def add_command(new_counter, user):
             if new_counter not in m_CounterHash:
                 m_CounterHash[new_counter] = 0
                 Parent.SendTwitchMessage("/me counter %s has been successfully created" % new_counter)
+                save_counters()
             else:
                 Parent.SendTwitchMessage("/me counter %s did already exist" % new_counter)
         else:
@@ -189,6 +190,7 @@ def remove_command(old_counter, user):
         if old_counter in m_CounterHash:
             del m_CounterHash[old_counter]
             Parent.SendTwitchMessage("/me counter %s has been succesfully removed" % old_counter)
+            save_counters()
         else:
             Parent.SendTwitchMessage("/me counter %s did not exist" % old_counter)
 
