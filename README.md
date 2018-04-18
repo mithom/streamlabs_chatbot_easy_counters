@@ -39,6 +39,7 @@ They will be kept in sync in real-time
 
 ### To be expected:
 * custom text messages
+* other platforms then twitch
 * your feature request here? mail me @ mi_thom@hotmail.com
 
 ## see it in action?
