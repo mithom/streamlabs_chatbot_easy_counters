@@ -98,5 +98,33 @@
     "tooltip":"command to be typed, this has to start with a '!'",
     "group":"Command Names",
     "value":"!toggleCounterPermissions"
+  },
+  "default_counter_message":{
+    "type":"textbox",
+    "label":"default_counter_message",
+    "tooltip":"the default message displayed when showing a counter",
+    "group":"Responses",
+    "value":"current {0} count is {1}"
+  },
+  "global_permission_toggle_message":{
+    "type":"textbox",
+    "label":"global_permission_toggle",
+    "tooltip":"the message displayed when toggling global permissions",
+    "group":"Responses",
+    "value":"the global permission to change counters has been set to {0}, {1}"
+  },
+  "on_global_permission_message":{
+    "type":"textbox",
+    "label":"on_global_permission",
+    "tooltip":"the message displayed when on global permission",
+    "group":"Responses",
+    "value":"the counter {0} is on the global permission"
+  },
+  "specific_permission_message":{
+    "type":"textbox",
+    "label":"specific_permission",
+    "tooltip":"the message displayed when on a specific permission",
+    "group":"Responses",
+    "value":"counter {0} permission is {1}, {2}"
   }
 }

@@ -12,7 +12,7 @@ ScriptName = "MoreCounters"
 Website = "https://www.Streamlabs.Chatbot.com"
 Description = "add counters at will with commands"
 Creator = "mi_thom"
-Version = "1.0.1"
+Version = "1.1.0"
 
 # ---------------------------------------
 #   Set Global Variables
@@ -26,6 +26,8 @@ m_PermissionsHash = {}
 m_CountersFile = os.path.join(os.path.dirname(__file__), "Counters.json")
 m_PermissionsFile = os.path.join(os.path.dirname(__file__), "permissions.json")
 m_SettingsFile = os.path.join(os.path.dirname(__file__), "counterSettings.json")
+m_MessagesHash = {}
+m_MessagesFile = os.path.join(os.path.dirname(__file__), "messages.json")
 
 
 def default_permission():
@@ -50,6 +52,12 @@ class Settings(object):
             self.allow_user_change_toggle = True
             self.toggle_to = "Regular"
             self.toggle_to_info = ""
+
+            # messages
+            self.default_counter_message = "current {0} count is {1}"
+            self.global_permission_toggle_message = "the global permission to change counters has been set to {1}, {2}"
+            self.on_global_permission_message = "the counter {0} is on the global permission"
+            self.specific_permission_message = "counter {0} permission is {1}, {2}"
 
             # command names
             self.addCommand = "!addCounter"
@@ -124,8 +132,8 @@ def fix_global_permission_on_load():
     if m_PermissionsHash.get("Global", default_permission())[0] != m_ModeratorPermission:
         Parent.Log(ScriptName, "global was on: %s" % m_PermissionsHash.get("Global", default_permission())[0])
         m_PermissionsHash.update(Global=[ScriptSettings.toggle_to, ScriptSettings.toggle_to_info])
-        Parent.SendTwitchMessage(
-            "/me the global permission to change counters has been set to %s" % str(m_PermissionsHash["Global"]))
+        message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
+        Parent.SendTwitchMessage(message)
 
 
 # ---------------------------------------
@@ -208,31 +216,34 @@ def handle_counter(counter, user, *args):
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] += 1
                 Parent.SendTwitchMessage(
-                    "/me [increased] current %s count is %s" % (counter[1:], m_CounterHash[counter]))
+                    "/me [increased] " + ScriptSettings.default_counter_message.format(counter[1:],
+                                                                                       m_CounterHash[counter]))
                 save_counters()
             elif args[0] == "-":
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] -= 1
                 Parent.SendTwitchMessage(
-                    "/me [decreased] current %s count is %s" % (counter[1:], m_CounterHash[counter]))
+                    "/me [decreased] " + ScriptSettings.default_counter_message.format(counter[1:],
+                                                                                       m_CounterHash[counter]))
                 save_counters()
             elif args[0].isdigit():
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] = int(args[0])
                 Parent.SendTwitchMessage(
-                    "/me [set nb] current %s count is %s" % (counter[1:], m_CounterHash[counter]))
+                    "/me [set nb] " + ScriptSettings.default_counter_message.format(counter[1:],
+                                                                                    m_CounterHash[counter]))
                 save_counters()
 
 
 def show_counter(counter, user):
     if counter in m_CounterHash:
-        message = "/me current %s count is %s" % (counter[1:], m_CounterHash[counter])
+        message = "/me " + ScriptSettings.default_counter_message.format(counter[1:], m_CounterHash[counter])
         send_if_not_on_cd("show %s" % counter, message, user)
 
 
 def show_user_change_permission_global(user):
-    message = "/me current global permission to change counters is %s" % str(
-        m_PermissionsHash.get("Global", default_permission()))
+    message = "/me " + ScriptSettings.global_permission_toggle_message.format("",
+        *m_PermissionsHash.get("Global", default_permission()))
     send_if_not_on_cd("show global permission", message, user)
 
 
@@ -242,9 +253,8 @@ def toggle_user_change_permission_global(user):
             m_PermissionsHash.update(Global=[ScriptSettings.toggle_to, ScriptSettings.toggle_to_info])
         else:
             m_PermissionsHash.update(Global=[m_ModeratorPermission, ""])
-        Parent.SendTwitchMessage(
-            "/me the global permission to change counters has been set to %s" % str(
-                m_PermissionsHash["Global"]))
+        message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
+        Parent.SendTwitchMessage(message)
         save_permissions()
 
 
@@ -252,17 +262,21 @@ def remove_permission(counter, user):
     if Parent.HasPermission(user, m_ModeratorPermission, ""):
         if counter in m_PermissionsHash:
             del m_PermissionsHash[counter]
-            Parent.SendTwitchMessage("/me the counter %s is back on the global permission" % counter)
+            message = "/me [removed] " + ScriptSettings.on_global_permission_message. \
+                format(counter, *m_PermissionsHash.get("Global", default_permission()))
+            Parent.SendTwitchMessage(message)
             save_permissions()
 
 
 def show_permission(counter, user):
-    if counter in m_PermissionsHash:
-        message = "/me the permission for %s is %s" % (counter, m_PermissionsHash[counter])
-    else:
-        message = "the counter %s is on the global permission" % counter
-    Parent.Log(ScriptName, message)
-    send_if_not_on_cd("show permission %s" % counter, message, user)
+    if counter in m_CounterHash:
+        if counter in m_PermissionsHash:
+            message = "/me " + ScriptSettings.specific_permission_message.format(counter, *m_PermissionsHash[counter])
+        else:
+            message = "/me " + ScriptSettings.on_global_permission_message. \
+                format(counter, *m_PermissionsHash.get("Global", default_permission()))
+        Parent.Log(ScriptName, message)
+        send_if_not_on_cd("show permission %s" % counter, message, user)
 
 
 def send_if_not_on_cd(cd_name, to_send, user):
@@ -287,8 +301,9 @@ def add_permission(counter, user, *args):
                 args.append("")
             if len(args) == 2 and args[0] in m_allowed_permissions:
                 m_PermissionsHash[counter] = args
-                Parent.SendTwitchMessage(
-                    "/me counter %s permission is set to %s" % (counter, str(m_PermissionsHash[counter])))
+                message = "/me [set] " + ScriptSettings.specific_permission_message.format(counter,
+                                                                                           *m_PermissionsHash[counter])
+                Parent.SendTwitchMessage(message)
                 save_permissions()
         else:
             Parent.SendTwitchMessage("/me counter %s does not exist" % counter)
