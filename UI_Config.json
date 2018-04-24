@@ -118,7 +118,7 @@
     "label":"global_permission_toggle",
     "tooltip":"the message displayed when toggling global permissions",
     "group":"Responses",
-    "value":"the global permission to change counters has been set to {0}, {1}"
+    "value":"the global permission to change counters has been set to {1}, {2}"
   },
   "on_global_permission_message":{
     "type":"textbox",
