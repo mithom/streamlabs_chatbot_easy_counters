@@ -135,7 +135,7 @@ def fix_global_permission_on_load():
     if m_PermissionsHash.get("Global", default_permission())[0] != m_ModeratorPermission:
         m_PermissionsHash.update(Global=[ScriptSettings.toggle_to, ScriptSettings.toggle_to_info])
         message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
-        Parent.SendTwitchMessage(message)
+        Parent.SendStreamMessage(message)
 
 
 def load_messages():
@@ -210,12 +210,12 @@ def add_command(new_counter, user, message=None):
                 if message is not None:
                     m_MessagesHash[new_counter] = message
                     save_messages()
-                Parent.SendTwitchMessage("/me counter %s has been successfully created" % new_counter)
+                Parent.SendStreamMessage("/me counter %s has been successfully created" % new_counter)
                 save_counters()
             else:
-                Parent.SendTwitchMessage("/me counter %s did already exist" % new_counter)
+                Parent.SendStreamMessage("/me counter %s did already exist" % new_counter)
         else:
-            Parent.SendTwitchMessage("/m %s is not in the correct format" % new_counter)
+            Parent.SendStreamMessage("/m %s is not in the correct format" % new_counter)
 
 
 def remove_command(old_counter, user):
@@ -228,11 +228,11 @@ def remove_command(old_counter, user):
             if old_counter in m_MessagesHash:
                 del m_MessagesHash[old_counter]
                 save_messages()
-            Parent.SendTwitchMessage("/me counter %s has been successfully removed" % old_counter)
+            Parent.SendStreamMessage("/me counter %s has been successfully removed" % old_counter)
             save_counters()
         else:
             message = ScriptSettings.counter_not_exist.format(old_counter)
-            Parent.SendTwitchMessage("/me " + message)
+            Parent.SendStreamMessage("/me " + message)
 
 
 def has_counter_permission(counter, user):
@@ -252,19 +252,19 @@ def handle_counter(counter, user, *args):
             if args[0] == "+":
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] += 1
-                Parent.SendTwitchMessage(
+                Parent.SendStreamMessage(
                     "/me [increased] " + get_message_for_counter(counter))
                 save_counters()
             elif args[0] == "-":
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] -= 1
-                Parent.SendTwitchMessage(
+                Parent.SendStreamMessage(
                     "/me [decreased] " + get_message_for_counter(counter))
                 save_counters()
             elif args[0].isdigit():
                 Parent.AddCooldown(ScriptName, "set %s" % counter, ScriptSettings.set_cd)
                 m_CounterHash[counter] = int(args[0])
-                Parent.SendTwitchMessage(
+                Parent.SendStreamMessage(
                     "/me [set nb] " + get_message_for_counter(counter))
                 save_counters()
 
@@ -288,7 +288,7 @@ def toggle_user_change_permission_global(user):
         else:
             m_PermissionsHash.update(Global=[m_ModeratorPermission, ""])
         message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
-        Parent.SendTwitchMessage(message)
+        Parent.SendStreamMessage(message)
         save_permissions()
 
 
@@ -299,11 +299,11 @@ def remove_permission(counter, user):
                 del m_PermissionsHash[counter]
                 message = "/me [removed] " + ScriptSettings.on_global_permission_message. \
                     format(counter, *m_PermissionsHash.get("Global", default_permission()))
-                Parent.SendTwitchMessage(message)
+                Parent.SendStreamMessage(message)
                 save_permissions()
         else:
             message = ScriptSettings.counter_not_exist.format(old_counter)
-            Parent.SendTwitchMessage("/me " + message)
+            Parent.SendStreamMessage("/me " + message)
 
 
 def show_permission(counter, user):
@@ -320,14 +320,14 @@ def send_if_not_on_cd(cd_name, to_send, user):
     if ScriptSettings.use_cd:
         if ScriptSettings.individual_cd:
             if not Parent.IsOnUserCooldown(ScriptName, cd_name, user):
-                Parent.SendTwitchMessage(to_send)
+                Parent.SendStreamMessage(to_send)
                 Parent.AddUserCooldown(ScriptName, cd_name, user, ScriptSettings.show_cd)
         else:
             if not Parent.IsOnCooldown(ScriptName, cd_name):
-                Parent.SendTwitchMessage(to_send)
+                Parent.SendStreamMessage(to_send)
                 Parent.AddCooldown(ScriptName, cd_name, ScriptSettings.show_cd)
     else:
-        Parent.SendTwitchMessage(to_send)
+        Parent.SendStreamMessage(to_send)
 
 
 def add_permission(counter, user, *args):
@@ -340,22 +340,22 @@ def add_permission(counter, user, *args):
                 m_PermissionsHash[counter] = args
                 message = "/me [set] " + ScriptSettings.specific_permission_message.format(counter,
                                                                                            *m_PermissionsHash[counter])
-                Parent.SendTwitchMessage(message)
+                Parent.SendStreamMessage(message)
                 save_permissions()
         else:
             message = ScriptSettings.counter_not_exist.format(counter)
-            Parent.SendTwitchMessage("/me " + message)
+            Parent.SendStreamMessage("/me " + message)
 
 
 def edit_message(counter, user, message):
     if Parent.HasPermission(user, m_ModeratorPermission, ""):
         if counter in m_CounterHash:
             m_MessagesHash[counter] = message
-            Parent.SendTwitchMessage("/me %s counter's messages has been updated"% counter)
+            Parent.SendStreamMessage("/me %s counter's messages has been updated"% counter)
             save_messages()
         else:
             message = ScriptSettings.counter_not_exist.format(counter)
-            Parent.SendTwitchMessage("/me " + message)
+            Parent.SendStreamMessage("/me " + message)
 
 
 def remove_message(counter, user):
@@ -363,11 +363,11 @@ def remove_message(counter, user):
         if counter in m_CounterHash:
             if counter in m_MessagesHash:
                 del m_MessagesHash[counter]
-                Parent.SendTwitchMessage("/me %s counter's message is back on default" % counter)
+                Parent.SendStreamMessage("/me %s counter's message is back on default" % counter)
                 save_messages()
         else:
             message = ScriptSettings.counter_not_exist.format(counter)
-            Parent.SendTwitchMessage("/me " + message)
+            Parent.SendStreamMessage("/me " + message)
 
 
 def process_command(data):
@@ -411,7 +411,7 @@ def process_command(data):
 # ---------------------------------------
 def Execute(data):
     global m_CounterHash
-    if data.IsFromTwitch() and data.IsChatMessage():
+    if (not data.IsFromDiscord()) and data.IsChatMessage():
         param1 = data.GetParam(0)
         if has_command_format(param1):
             process_command(data)

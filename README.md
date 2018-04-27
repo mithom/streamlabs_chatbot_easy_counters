@@ -54,7 +54,6 @@ They will be kept in sync in real-time
 * messages.json
 
 ### To be expected:
-* other platforms then twitch
 * your feature request here? mail me @ mi_thom@hotmail.com
 
 ## see it in action?
@@ -62,6 +61,8 @@ streamers that are using this script:
 * [Billie_bob](http://www.twitch.tv/billie_bob)
 
 ### changelog:
+v 1.2.1: support for youtube and mixer
+
 v 1.2.0: ability to change message from specific counters
 
 v 1.1.1:
