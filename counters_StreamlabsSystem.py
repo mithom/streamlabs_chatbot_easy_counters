@@ -12,7 +12,7 @@ ScriptName = "MoreCounters"
 Website = "https://www.Streamlabs.Chatbot.com"
 Description = "add counters at will with commands"
 Creator = "mi_thom"
-Version = "1.2.0"
+Version = "1.2.1"
 
 # ---------------------------------------
 #   Set Global Variables
