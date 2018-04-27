@@ -176,7 +176,7 @@ def ReloadSettings(jsondata):
     global ScriptSettings
     ScriptSettings.reload(jsondata)
     fix_global_permission_on_load()
-    Parent.Log('saving settings successful')
+    Parent.Log(ScriptName, 'saving settings successful')
     return
 
 
