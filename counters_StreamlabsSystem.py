@@ -99,7 +99,6 @@ def load_counters():
     try:
         with codecs.open(m_CountersFile, mode="r") as f:
             m_CounterHash = json.load(f)
-        Parent.Log(ScriptName, "current counters are: %s" % (str(m_CounterHash)))
     except:
         Parent.Log(ScriptName, "failed to load counters, counters have been reset")
 
@@ -118,7 +117,6 @@ def load_permissions():
     try:
         with codecs.open(m_PermissionsFile, mode="r") as f:
             m_PermissionsHash = json.load(f)
-        Parent.Log(ScriptName, "current permissions are: %s" % (str(m_PermissionsHash)))
     except:
         Parent.Log(ScriptName, "failed to load permissions, permissions have been reset to mods only")
 
@@ -135,7 +133,6 @@ def save_permissions():
 def fix_global_permission_on_load():
     global m_PermissionsHash
     if m_PermissionsHash.get("Global", default_permission())[0] != m_ModeratorPermission:
-        Parent.Log(ScriptName, "global was on: %s" % m_PermissionsHash.get("Global", default_permission())[0])
         m_PermissionsHash.update(Global=[ScriptSettings.toggle_to, ScriptSettings.toggle_to_info])
         message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
         Parent.SendTwitchMessage(message)
@@ -147,7 +144,6 @@ def load_messages():
     try:
         with codecs.open(m_MessagesFile, mode="r") as f:
             m_MessagesHash = json.load(f)
-        Parent.Log(ScriptName, "current messages are: %s" % (str(m_MessagesHash)))
     except:
         Parent.Log(ScriptName, "failed to load messages, messages have been reset")
 
@@ -178,10 +174,9 @@ def Init():
 def ReloadSettings(jsondata):
     # load in json after pressing save settings button
     global ScriptSettings
-    Parent.Log(ScriptName, jsondata)
     ScriptSettings.reload(jsondata)
     fix_global_permission_on_load()
-    Parent.Log(ScriptName, str(ScriptSettings.show_cd))
+    Parent.Log('saving settings successful')
     return
 
 
@@ -318,7 +313,6 @@ def show_permission(counter, user):
         else:
             message = "/me " + ScriptSettings.on_global_permission_message. \
                 format(counter, *m_PermissionsHash.get("Global", default_permission()))
-        Parent.Log(ScriptName, message)
         send_if_not_on_cd("show permission %s" % counter, message, user)
 
 
