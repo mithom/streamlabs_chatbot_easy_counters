@@ -106,6 +106,13 @@
     "group":"Command Names",
     "value":"!toggleCounterPermissions"
   },
+  "countersCommand":{
+    "type":"textbox",
+    "label":"get all existing counters",
+    "tooltip":"command to be typed, this has to start with a '!'",
+    "group":"Command Names",
+    "value":"!counters"
+  },
   "default_counter_message":{
     "type":"textbox",
     "label":"default_counter_message",

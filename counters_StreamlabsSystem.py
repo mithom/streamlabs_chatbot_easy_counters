@@ -72,6 +72,7 @@ class Settings(object):
             self.getUserChangePermissionGlobal = "!counterPermissions"
             self.toggleUserChangeGlobal = "!toggleCounterPermissions"
             self.editCommand = "!editCounter"
+            self.countersCommand = "!counters"
 
     def reload(self, jsondata):
         """ Reload settings from Chatbot user interface by given json data. """
@@ -134,7 +135,8 @@ def fix_global_permission_on_load():
     global m_PermissionsHash
     if m_PermissionsHash.get("Global", default_permission())[0] != m_ModeratorPermission:
         m_PermissionsHash.update(Global=[ScriptSettings.toggle_to, ScriptSettings.toggle_to_info])
-        message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
+        message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("",
+                                                                                        *m_PermissionsHash["Global"])
         Parent.SendStreamMessage(message)
 
 
@@ -155,6 +157,8 @@ def save_messages():
     except:
         Parent.Log(ScriptName, "Failed to save the messages")
     return
+
+
 # ---------------------------------------
 #   [Required] Intialize Data (Only called on Load)
 # ---------------------------------------
@@ -277,7 +281,8 @@ def show_counter(counter, user):
 
 def show_user_change_permission_global(user):
     message = "/me " + ScriptSettings.global_permission_toggle_message.format("",
-        *m_PermissionsHash.get("Global", default_permission()))
+                                                                              *m_PermissionsHash.get("Global",
+                                                                                                     default_permission()))
     send_if_not_on_cd("show global permission", message, user)
 
 
@@ -287,7 +292,8 @@ def toggle_user_change_permission_global(user):
             m_PermissionsHash.update(Global=[ScriptSettings.toggle_to, ScriptSettings.toggle_to_info])
         else:
             m_PermissionsHash.update(Global=[m_ModeratorPermission, ""])
-        message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("", *m_PermissionsHash["Global"])
+        message = "/me [set] " + ScriptSettings.global_permission_toggle_message.format("",
+                                                                                        *m_PermissionsHash["Global"])
         Parent.SendStreamMessage(message)
         save_permissions()
 
@@ -351,7 +357,7 @@ def edit_message(counter, user, message):
     if Parent.HasPermission(user, m_ModeratorPermission, ""):
         if counter in m_CounterHash:
             m_MessagesHash[counter] = message
-            Parent.SendStreamMessage("/me %s counter's messages has been updated"% counter)
+            Parent.SendStreamMessage("/me %s counter's messages has been updated" % counter)
             save_messages()
         else:
             message = ScriptSettings.counter_not_exist.format(counter)
@@ -368,6 +374,11 @@ def remove_message(counter, user):
         else:
             message = ScriptSettings.counter_not_exist.format(counter)
             Parent.SendStreamMessage("/me " + message)
+
+
+def show_all_counters():
+    to_send = "current counters are: " + ", ".join(m_CounterHash.iterkeys()) + "."
+    Parent.SendStreamMessage(to_send)
 
 
 def process_command(data):
@@ -393,6 +404,8 @@ def process_command(data):
             show_user_change_permission_global(data.User)
         elif param1 == ScriptSettings.toggleUserChangeGlobal:
             toggle_user_change_permission_global(data.User)
+        elif param1 == ScriptSettings.countersCommand:
+            show_all_counters()
         else:
             show_counter(param1, data.User)
     elif word_count > 2:
